@@ -8,5 +8,38 @@
         android:id="@+id/splash_page"
         android:name="com.example.yourfont.splash_page"
         android:label="fragment_splash_page"
-        tools:layout="@layout/fragment_splash_page" />
+        tools:layout="@layout/fragment_splash_page" >
+        <action
+            android:id="@+id/action_splash_page_to_tutorial"
+            app:destination="@id/tutorial"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+    </fragment>
+    <fragment android:id="@+id/tutorial" >
+        <action
+            android:id="@+id/action_tutorial_to_camera_view"
+            app:destination="@id/camera_view" />
+    </fragment>
+    <fragment
+        android:id="@+id/camera_view"
+        android:name="com.example.yourfont.camera_view"
+        android:label="fragment_camera_view"
+        tools:layout="@layout/fragment_camera_view" >
+        <action
+            android:id="@+id/action_camera_view_to_saved_fonts"
+            app:destination="@id/saved_fonts" />
+    </fragment>
+    <fragment
+        android:id="@+id/saved_fonts"
+        android:name="com.example.yourfont.saved_fonts"
+        android:label="fragment_saved_fonts"
+        tools:layout="@layout/fragment_saved_fonts" >
+        <action
+            android:id="@+id/action_saved_fonts_to_edit_font"
+            app:destination="@id/edit_font" />
+    </fragment>
+    <fragment
+        android:id="@+id/edit_font"
+        android:name="com.example.yourfont.edit_font"
+        android:label="fragment_edit_font"
+        tools:layout="@layout/fragment_edit_font" />
 </navigation>
