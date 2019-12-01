@@ -6,7 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity
-        implements Frag.OnFragmentInteractionListener, Frag2.OnFragmentInteractionListener{
+        implements tutorial.OnFragmentInteractionListener, camera_view.OnFragmentInteractionListener,
+        splash_page.OnFragmentInteractionListener, saved_fonts.OnFragmentInteractionListener, edit_font.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

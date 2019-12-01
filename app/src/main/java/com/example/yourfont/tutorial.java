@@ -5,25 +5,21 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Frag.OnFragmentInteractionListener} interface
+ * {@link tutorial.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Frag#newInstance} factory method to
+ * Use the {@link tutorial#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Frag extends Fragment {
+public class tutorial extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,7 +31,7 @@ public class Frag extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Frag() {
+    public tutorial() {
         // Required empty public constructor
     }
 
@@ -45,11 +41,11 @@ public class Frag extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Frag.
+     * @return A new instance of fragment tutorial.
      */
     // TODO: Rename and change types and number of parameters
-    public static Frag newInstance(String param1, String param2) {
-        Frag fragment = new Frag();
+    public static tutorial newInstance(String param1, String param2) {
+        tutorial fragment = new tutorial();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,27 +63,10 @@ public class Frag extends Fragment {
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState){
-        super.onViewCreated(view, savedInstanceState);
-        configureButton(view);
-    }
-
-    private void configureButton(View view) {
-        final NavController navigation = Navigation.findNavController(view);
-        Button button = (Button) view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-    }
-
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_, container, false);
+        return inflater.inflate(R.layout.fragment_tutorial, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

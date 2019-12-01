@@ -12,12 +12,8 @@
         <action
             android:id="@+id/action_splash_page_to_tutorial"
             app:destination="@id/tutorial"
-            app:enterAnim="@anim/nav_default_enter_anim" />
-    </fragment>
-    <fragment android:id="@+id/tutorial" >
-        <action
-            android:id="@+id/action_tutorial_to_camera_view"
-            app:destination="@id/camera_view" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/camera_view"
@@ -42,4 +38,13 @@
         android:name="com.example.yourfont.edit_font"
         android:label="fragment_edit_font"
         tools:layout="@layout/fragment_edit_font" />
+    <fragment
+        android:id="@+id/tutorial"
+        android:name="com.example.yourfont.tutorial"
+        android:label="fragment_tutorial"
+        tools:layout="@layout/fragment_tutorial" >
+        <action
+            android:id="@+id/action_tutorial_to_camera_view"
+            app:destination="@id/camera_view" />
+    </fragment>
 </navigation>
