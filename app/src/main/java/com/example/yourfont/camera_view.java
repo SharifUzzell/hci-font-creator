@@ -1,14 +1,20 @@
 package com.example.yourfont;
 
+import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 
 /**
@@ -28,6 +34,10 @@ public class camera_view extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button mCaptureButton;
+    ImageView mImageView;
+    Uri image_uri;
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,6 +70,8 @@ public class camera_view extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -74,6 +86,43 @@ public class camera_view extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onViewCreated (View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+
+        mCaptureButton = (Button)  view.findViewById(R.id.btnCapture);
+        mImageView = (ImageView) view.findViewById(R.id.ImageView);
+
+        mCaptureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permission, 1000);
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        openCamera();
+    }
+
+    private void openCamera(){
+        Context context = this.getContext();
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "heyo");
+        image_uri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent .putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        startActivityForResult(cameraIntent, 1001);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        mImageView.setImageURI(image_uri);
     }
 
     @Override
