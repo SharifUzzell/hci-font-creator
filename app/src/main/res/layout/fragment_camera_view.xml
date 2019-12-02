@@ -15,7 +15,7 @@
     <Button
         android:id="@+id/btnCapture"
         android:layout_below="@id/ImageView"
-        android:text="CAPTURE"
+        android:text="RETAKE"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
