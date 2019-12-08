@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pen_and_paper_image">pen and paper image</string>
+    <string name="write_the_following_sentence_on_a_sheet_of_paper_in_all_caps_be_sure_to_provide_additional_spacing_between_letters_for_clarity">Write the following sentence on a sheet of paper in all caps. Be sure to provide additional spacing between letters for clarity.</string>
+    <string name="heading">HEADING</string>
 </resources>

@@ -5,10 +5,15 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
 /**
@@ -20,16 +25,15 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class tutorial extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private SliderAdapter sliderAdapter;
+    private TextView[] mDots;
+    private LinearLayout mDotLayout;
+    private Button mNextBtn;
+    private Button mBackBtn;
+    private int mCurrentPage;
+
 
     public tutorial() {
         // Required empty public constructor
@@ -37,7 +41,7 @@ public class tutorial extends Fragment {
 
     /**
      * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * this fragment using the provided parametersn .
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
@@ -47,8 +51,6 @@ public class tutorial extends Fragment {
     public static tutorial newInstance(String param1, String param2) {
         tutorial fragment = new tutorial();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,11 +58,11 @@ public class tutorial extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,11 +71,20 @@ public class tutorial extends Fragment {
         return inflater.inflate(R.layout.fragment_tutorial, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void onViewCreated (View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        ViewPager mSlideViewPager = (ViewPager) view.findViewById(R.id.slideViewPager);
+        sliderAdapter = new SliderAdapter(this.getContext());
+        mSlideViewPager.setAdapter(sliderAdapter);
+        mDotLayout = (LinearLayout) view.findViewById(R.id.dotsLayout);
+
+        mNextBtn = (Button) view.findViewById(R.id.nextBtn);
+        mBackBtn = (Button) view.findViewById(R.id.prevBtn);
+
+        addDotsIndicator(0);
+        mSlideViewPager.addOnPageChangeListener(viewListener);
+
     }
 
     @Override
@@ -86,6 +97,58 @@ public class tutorial extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
+    public void addDotsIndicator(int position){
+        mDots = new TextView[3];
+        for(int i = 0; i < mDots.length; i++){
+            mDots[i] = new TextView(this.getContext());
+            mDots[i].setText(Html.fromHtml("&#8226;"));
+            mDots[i].setTextSize(35);
+            mDots[i].setTextColor(getResources().getColor(R.color.colorTransparentBlue));
+            mDotLayout.addView(mDots[i]);
+        }
+        if(mDots.length > 0){
+            mDots[position].setTextColor(getResources().getColor(R.color.colorBlue));
+        }
+
+    }
+    ViewPager.OnPageChangeListener viewListener = new ViewPager.SimpleOnPageChangeListener(){
+        @Override
+        public void onPageScrolled(int i, float v, int i1){
+
+        }
+        @Override
+        public void onPageSelected(int i){
+            addDotsIndicator(i);
+            mCurrentPage = i;
+            if(i == 0 ){
+                mNextBtn.setEnabled(true);
+                mBackBtn.setEnabled(false);
+                mBackBtn.setVisibility(View.INVISIBLE);
+                mNextBtn.setText("Next");
+                mBackBtn.setText("");
+
+
+            }else if (i == mDots.length - 1){
+                mNextBtn.setEnabled(true);
+                mBackBtn.setEnabled(true);
+                mBackBtn.setVisibility(View.VISIBLE);
+                mNextBtn.setText("Finish");
+                mBackBtn.setText("Back");
+            }else{
+                mNextBtn.setEnabled(true);
+                mBackBtn.setEnabled(true);
+                mBackBtn.setVisibility(View.VISIBLE);
+                mNextBtn.setText("Next");
+                mBackBtn.setText("Back  ");
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int i){
+
+        }
+    };
 
     @Override
     public void onDetach() {
