@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ public class camera_view extends Fragment {
     private String mParam2;
 
     Button mCaptureButton;
+    Button mAcceptBtn;
     ImageView mImageView;
     Uri image_uri;
 
@@ -70,7 +73,6 @@ public class camera_view extends Fragment {
         String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         requestPermissions(permission, 1000);
 
-
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -97,14 +99,23 @@ public class camera_view extends Fragment {
     public void onViewCreated (View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        mCaptureButton = (Button)  view.findViewById(R.id.btnCapture);
+        mCaptureButton = (Button) view.findViewById(R.id.btnCapture);
+        mAcceptBtn = (Button) view.findViewById(R.id.btnAccept);
         mImageView = (ImageView) view.findViewById(R.id.ImageView);
+        final NavController navigation = Navigation.findNavController(view);
 
         mCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                 requestPermissions(permission, 1000);
+            }
+        });
+
+        mAcceptBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigation.navigate(R.id.action_camera_view_to_saved_fonts);
             }
         });
     }

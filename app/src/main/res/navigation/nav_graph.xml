@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_splash_page" >
         <action
             android:id="@+id/action_splash_page_to_tutorial"
-            app:destination="@id/tutorial"
+            app:destination="@+id/tutorial"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>

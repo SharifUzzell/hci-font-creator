@@ -5,21 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".tutorial">
 
+
+    <Button
+        android:id="@+id/btnCapture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAccept"
+        android:layout_marginTop="0dp"
+        android:minHeight="48dip"
+        android:text="RETAKE" />
+
+    <Button
+        android:id="@+id/btnAccept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ImageView"
+        android:layout_alignParentBottom="false"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="ACCEPT" />
+
     <ImageView
         android:id="@+id/ImageView"
         android:layout_width="match_parent"
         android:layout_height="1500px"
         android:layout_alignParentTop="true"
-        />
-
-    <Button
-        android:id="@+id/btnCapture"
-        android:layout_below="@id/ImageView"
-        android:text="RETAKE"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        />
+        android:layout_marginBottom="0dp" />
 
 </RelativeLayout>

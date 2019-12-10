@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:stateListAnimator="@null"
-        android:text="Next"
+        android:text="Finish"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/dotsLayout"

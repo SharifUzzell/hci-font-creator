@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import android.text.Html;
@@ -30,9 +32,7 @@ public class tutorial extends Fragment {
     private SliderAdapter sliderAdapter;
     private TextView[] mDots;
     private LinearLayout mDotLayout;
-    private Button mNextBtn;
-    private Button mBackBtn;
-    private int mCurrentPage;
+    private Button mFinishBtn;
 
 
     public tutorial() {
@@ -59,8 +59,6 @@ public class tutorial extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
     }
 
 
@@ -79,11 +77,18 @@ public class tutorial extends Fragment {
         mSlideViewPager.setAdapter(sliderAdapter);
         mDotLayout = (LinearLayout) view.findViewById(R.id.dotsLayout);
 
-        mNextBtn = (Button) view.findViewById(R.id.nextBtn);
-        mBackBtn = (Button) view.findViewById(R.id.prevBtn);
-
         addDotsIndicator(0);
         mSlideViewPager.addOnPageChangeListener(viewListener);
+
+        final NavController navigation = Navigation.findNavController(view);
+        mFinishBtn = (Button) view.findViewById(R.id.nextBtn);
+        mFinishBtn.setVisibility(View.INVISIBLE);
+        mFinishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigation.navigate(R.id.action_tutorial_to_camera_view);
+            }
+        });
 
     }
 
@@ -112,6 +117,7 @@ public class tutorial extends Fragment {
         }
 
     }
+
     ViewPager.OnPageChangeListener viewListener = new ViewPager.SimpleOnPageChangeListener(){
         @Override
         public void onPageScrolled(int i, float v, int i1){
@@ -119,28 +125,16 @@ public class tutorial extends Fragment {
         }
         @Override
         public void onPageSelected(int i){
-            addDotsIndicator(i);
-            mCurrentPage = i;
-            if(i == 0 ){
-                mNextBtn.setEnabled(true);
-                mBackBtn.setEnabled(false);
-                mBackBtn.setVisibility(View.INVISIBLE);
-                mNextBtn.setText("Next");
-                mBackBtn.setText("");
-
-
-            }else if (i == mDots.length - 1){
-                mNextBtn.setEnabled(true);
-                mBackBtn.setEnabled(true);
-                mBackBtn.setVisibility(View.VISIBLE);
-                mNextBtn.setText("Finish");
-                mBackBtn.setText("Back");
+            for(int j = 0; j < mDots.length; j++){
+                mDots[j].setTextColor(getResources().getColor(R.color.colorTransparentBlue));
+            }
+            mDots[i].setTextColor(getResources().getColor(R.color.colorBlue));
+            if (i == mDots.length - 1){
+                mFinishBtn.setEnabled(true);
+                mFinishBtn.setVisibility(View.VISIBLE);
             }else{
-                mNextBtn.setEnabled(true);
-                mBackBtn.setEnabled(true);
-                mBackBtn.setVisibility(View.VISIBLE);
-                mNextBtn.setText("Next");
-                mBackBtn.setText("Back  ");
+                mFinishBtn.setEnabled(false);
+                mFinishBtn.setVisibility(View.INVISIBLE);
             }
         }
 
