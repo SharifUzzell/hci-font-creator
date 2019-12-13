@@ -115,7 +115,7 @@ public class camera_view extends Fragment {
         mAcceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navigation.navigate(R.id.action_camera_view_to_saved_fonts);
+                navigation.navigate(R.id.action_camera_view_to_edit_font);
             }
         });
     }
@@ -129,12 +129,14 @@ public class camera_view extends Fragment {
         Context context = this.getContext();
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
-        values.put(MediaStore.Images.Media.DESCRIPTION, "heyo");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "new picture");
         image_uri = context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent .putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
         startActivityForResult(cameraIntent, 1001);
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){

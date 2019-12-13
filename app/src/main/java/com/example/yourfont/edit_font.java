@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -86,6 +88,14 @@ public class edit_font extends Fragment {
     public void onViewCreated (View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
         fillGrid(view);
+        Button saveButton = (Button) view.findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final NavController navigation = Navigation.findNavController(v);
+                navigation.navigate(R.id.action_edit_font_to_saved_fonts);
+            }
+        });
     }
 
     public void fillGrid(View view) {
@@ -115,9 +125,12 @@ public class edit_font extends Fragment {
                 @Override
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
-                    Toast.makeText(getContext(),"Edit letter" ,Toast.LENGTH_SHORT).show();
+                    final NavController navigation = Navigation.findNavController(v);
+                    navigation.navigate(R.id.action_edit_font_to_camera_view);
                 }
             });
+
+
 
             gridLayout.addView(letterButton);
 

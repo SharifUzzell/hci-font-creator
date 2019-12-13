@@ -9,8 +9,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="610dp">
 
         <TextView
             android:id="@+id/editFontTV"
@@ -22,32 +21,53 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="0dp"
             android:layout_marginRight="0dp"
+            android:gravity="center_horizontal"
             android:text="Edit Font"
             android:textSize="20dp" />
 
         <ScrollView
             android:id="@+id/scroll"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editFontTV"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center_horizontal"
             android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             app:layout_constraintTop_toBottomOf="@id/editFontTV">
 
             <GridLayout
                 android:id="@+id/editGrid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:columnCount= "4"
-                android:layout_gravity="center_horizontal">
-            </GridLayout>
+                android:layout_gravity="center_horizontal"
+                android:columnCount="4"></GridLayout>
         </ScrollView>
+
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/saveButton"
+
+        android:text="Save"
+
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#ABABAB"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+
+        android:layout_gravity="bottom|center_horizontal"
+        />
 </FrameLayout>
