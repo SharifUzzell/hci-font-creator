@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -109,6 +110,15 @@ public class edit_font extends Fragment {
             letterButton.setText(Character.toString((char) (i + 65)));
             letterButton.setBackgroundResource(R.drawable.savedfilebutton);
 
+            letterButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    Toast.makeText(getContext(),"Edit letter" ,Toast.LENGTH_SHORT).show();
+                }
+            });
+
             gridLayout.addView(letterButton);
 
 
@@ -130,6 +140,15 @@ public class edit_font extends Fragment {
             letterButton2.setLayoutParams(lp2);
             letterButton2.setText(Character.toString((char) (i + 97)));
             letterButton2.setBackgroundResource(R.drawable.savedfilebutton);
+
+            letterButton2.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    Toast.makeText(getContext(),"Edit letter" ,Toast.LENGTH_SHORT).show();
+                }
+            });
 
             gridLayout.addView(letterButton2);
         }
