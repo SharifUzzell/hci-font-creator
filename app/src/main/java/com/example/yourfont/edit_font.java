@@ -1,14 +1,26 @@
 package com.example.yourfont;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 /**
@@ -67,6 +79,60 @@ public class edit_font extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_edit_font, container, false);
+    }
+
+    @Override
+    public void onViewCreated (View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        fillGrid(view);
+    }
+
+    public void fillGrid(View view) {
+        GridLayout gridLayout = view.findViewById(R.id.editGrid);
+
+        for (int i = 0; i < 26; i++) {
+            Button letterButton = new Button(getContext());
+
+            // Defining the layout parameters of the TextView
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.CENTER_VERTICAL);
+            lp.width = (int)getResources().getDimension(R.dimen.editButton);
+            lp.height = (int)getResources().getDimension(R.dimen.editButton);
+            lp.setMargins(10,10,10,10);
+            if(i % 2 == 0) {
+                lp.leftMargin = 20;
+            }
+
+            letterButton.setLayoutParams(lp);
+            letterButton.setText(Character.toString((char) (i + 65)));
+            letterButton.setBackgroundResource(R.drawable.savedfilebutton);
+
+            gridLayout.addView(letterButton);
+
+
+            Button letterButton2 = new Button(getContext());
+
+            // Defining the layout parameters of the TextView
+            RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp2.addRule(RelativeLayout.CENTER_VERTICAL);
+            lp2.width = (int)getResources().getDimension(R.dimen.editButton);
+            lp2.height = (int)getResources().getDimension(R.dimen.editButton);
+            lp2.setMargins(10,10,10,10);
+            if(i % 2 != 0) {
+                lp2.rightMargin = 20;
+            }
+
+            letterButton2.setTransformationMethod(null);
+            letterButton2.setLayoutParams(lp2);
+            letterButton2.setText(Character.toString((char) (i + 97)));
+            letterButton2.setBackgroundResource(R.drawable.savedfilebutton);
+
+            gridLayout.addView(letterButton2);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

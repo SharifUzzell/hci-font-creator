@@ -2,4 +2,5 @@
 <resources>
     <dimen name="profileButtonW">200dp</dimen>
     <dimen name="profileButtonH">50dp</dimen>
+    <dimen name="editButton">60dp</dimen>
 </resources>

@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -113,7 +115,9 @@ public class saved_fonts extends Fragment {
             lp.bottomMargin = 20;
             lp.rightMargin = 50;
             exportText.setId(x);
-            exportText.setBackgroundColor(Color.parseColor("#A8FFFE"));
+            exportText.setBackgroundColor(Color.parseColor("#E6F0FF"));
+            if(x % 2 != 0)
+                exportText.setBackgroundColor(Color.parseColor("#D1E4FF"));
             exportText.setLayoutParams(lp);
 
             //set on click
@@ -122,7 +126,7 @@ public class saved_fonts extends Fragment {
                 @Override
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
-                    Toast.makeText(getContext(),"exportButton " + exportText.getId(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Exporting Sample Font " + exportText.getId(),Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -144,17 +148,20 @@ public class saved_fonts extends Fragment {
             lp2.topMargin = 20;
             lp2.bottomMargin = 20;
             lp2.rightMargin = 50;
-            editText.setBackgroundColor(Color.parseColor("#A8FFFE"));
+            editText.setBackgroundColor(Color.parseColor("#E6F0FF"));
+            if(x % 2 != 0)
+                editText.setBackgroundColor(Color.parseColor("#D1E4FF"));
+            exportText.setLayoutParams(lp);
             editText.setLayoutParams(lp2);
 
+            final NavController navigation = Navigation.findNavController(view);
             //set on click
             editText.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
-
-                    Toast.makeText(getContext(),"editButton " + exportText.getId(),Toast.LENGTH_SHORT).show();
+                    navigation.navigate(R.id.action_saved_fonts_to_edit_font);
                 }
             });
 
