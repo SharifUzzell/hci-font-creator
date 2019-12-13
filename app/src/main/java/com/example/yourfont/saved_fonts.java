@@ -1,14 +1,22 @@
 package com.example.yourfont;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -63,10 +71,124 @@ public class saved_fonts extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_saved_fonts, container, false);
+    }
+
+    @Override
+    public void onViewCreated (View view, Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        fillLayout(view);
+    }
+
+    public void fillLayout(View view) {
+        LinearLayout layout = (LinearLayout) view.findViewById(R.id.savedFontsLinearLayout);
+
+        for (int x = 1; x < 30; x++) {
+            // Relative Layout
+            RelativeLayout relativeLayout = new RelativeLayout(getContext());
+
+            //Relative layout params
+            RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            //Alternating background color
+            if(x % 2 != 0)
+                relativeLayout.setBackgroundColor(Color.parseColor("#A8CCFF"));
+
+            ////////////////////////////////////////
+            // Creating first TextView            //
+            ////////////////////////////////////////
+            final TextView exportText = new TextView(getContext());
+            exportText.setText(" Export ");
+
+            // Setting params
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.CENTER_VERTICAL);
+            lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            lp.topMargin = 20;
+            lp.bottomMargin = 20;
+            lp.rightMargin = 50;
+            exportText.setId(x);
+            exportText.setBackgroundColor(Color.parseColor("#A8FFFE"));
+            exportText.setLayoutParams(lp);
+
+            //set on click
+            exportText.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+                    Toast.makeText(getContext(),"exportButton " + exportText.getId(),Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            ////////////////////////////////////////
+
+            ////////////////////////////////////////
+            // Creating second TextView           //
+            ////////////////////////////////////////
+            // Creating a new TextView
+            TextView editText = new TextView(getContext());
+            editText.setText(" Edit ");
+
+            // Defining the layout parameters of the TextView
+            RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp2.addRule(RelativeLayout.CENTER_VERTICAL);
+            lp2.addRule(RelativeLayout.LEFT_OF, exportText.getId());
+            lp2.topMargin = 20;
+            lp2.bottomMargin = 20;
+            lp2.rightMargin = 50;
+            editText.setBackgroundColor(Color.parseColor("#A8FFFE"));
+            editText.setLayoutParams(lp2);
+
+            //set on click
+            editText.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+
+                    Toast.makeText(getContext(),"editButton " + exportText.getId(),Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            ////////////////////////////////////////
+
+            ////////////////////////////////////////
+            // Creating third TextView            //
+            ////////////////////////////////////////
+            // Creating a new TextView
+            TextView fontNameText = new TextView(getContext());
+            fontNameText.setText("Sample Font " + x);
+
+            // Defining the layout parameters of the TextView
+            RelativeLayout.LayoutParams lp3 = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp3.addRule(RelativeLayout.CENTER_VERTICAL);
+            lp3.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            lp3.topMargin = 20;
+            lp3.bottomMargin = 20;
+            lp3.leftMargin = 100;
+
+            // Setting the parameters on the TextView
+            fontNameText.setLayoutParams(lp3);
+            ////////////////////////////////////////
+
+            // Add text views to layout
+            relativeLayout.addView(fontNameText);
+            relativeLayout.addView(editText);
+            relativeLayout.addView(exportText);
+
+            //add relative layout to scrollable list
+            layout.addView(relativeLayout);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
